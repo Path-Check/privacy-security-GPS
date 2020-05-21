@@ -1,0 +1,5 @@
+# Other Technical Measures
+* Data shall be as accurate as possible
+* Privacy shall be as inclusive as possible, and this includes making the application work just as well for people with different abilities, wherever technically possible, and based on W3C/WAI standards.
+* Measures shall be taken to avoid algorithms leading to unfair outcomes for people based on immutable characteristics of people (e.g. race, gender, age) or socio-economic class This includes proxy variables such as location, which may infer these items.
+* The potential risk that information about people may be exposed or misused as a result of a contact tracing system must be proportional to the public health benefits of that system for combating the epidemic. The analysis of proportionality should take into account the efficacy of the contact tracing app at reducing the incidence of new cases and factors including but not limited to scope and purpose of the contact tracing app, type(s) of data collected, collection processes, sharing, retention, and deletion of data.
