@@ -8,3 +8,6 @@ This repository is for maintaining...
 * Related documents, such as Data Privacy Impact Assessments
 
 This document should be considered the guiding requirements that Path Check Inc expects to implement, and will verify against.
+
+# Contributions
+Please submit a pull request for any changes.  All PR's require two reviewers.
