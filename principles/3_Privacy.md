@@ -6,7 +6,8 @@
 * Users can choose how much data to share from symptom surveys
 
 ## Consent
-* A member of the public (MoP) shall consent to data being collected or transmitted explicitly, that is it should not be implied by usage, or mixed with another consent
+
+* A member of the public (MoP) shall be explicitly asked for consent to data being collected or transmitted. Consent should not be implied by usage, or mixed with any other consent requests
 * A MoP shall provide informed consent, that is they must be able to understand what they are consenting to and the purposes for which each category of data is gathered
 * Information about privacy shall be communicated in plain English, not legal, or technical language
 * Consent to collect data shall be separate from consent to disclose data, and include retention periods
@@ -45,6 +46,7 @@
 * Retention periods in SafePlaces shall be configurable and enforced technically
 
 # Other Technical Measures
+
 * Data shall be as accurate as possible
 * Privacy shall be as inclusive as possible, and this includes making the application work just as well for people with different abilities, wherever technically possible, and based on W3C/WAI standards
 * Measures shall be taken to avoid algorithms leading to unfair outcomes for people based on immutable characteristics of people (e.g. race, gender, age) or socio-economic class This includes proxy variables such as location, which may infer these items
