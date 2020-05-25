@@ -10,9 +10,20 @@ We believe that transparency in our software is an important part of ensuring se
 
 This document should be considered the guiding requirements that Path Check Inc expects to implement, and will verify against.
 
-# Contributions
+# How to contribute
 
-Please submit a pull request for any changes.  All pull requests require two reviewers.
+## Proposing changes to the principles
+
+* Submit a pull request
+* Request reviews on the #fn_privacy channel (message Adam Leon Smith if you need to be added to this channel)
+
+## Testing the principles
+
+* Read the principles and pick a privacy or security principle you can test
+* If it relates to an OWASP verification, the test methodology is documented in the OWASP github for [web testing](https://github.com/OWASP/wstg) or [mobile testing](https://github.com/OWASP/owasp-mstg)
+* Create a markdown (or any other) document describing your test method and results in github
+* Create a pull request to merge this in to the master branch
+* Request reviews on the #fn_privacy channel (message Adam Leon Smith if you need to be added to this channel)
 
 # Other sources of Information
 
