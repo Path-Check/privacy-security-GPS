@@ -3,7 +3,7 @@
 ## Safe Paths
 
 ### OWASP Principles
-The following principles have been derived from OWASP principles applicable to mobile applications, and applicable to the Safe Paths app:
+The following principles have been derived from OWASP (Open Web Application Security Project) principles applicable to mobile applications, and applicable to the Safe Paths app:
 
 * MSTG-ARCH-1 All app components are identified and known to be needed.
 * MSTG-ARCH-2 Security controls are never enforced only on the client side, but on the respective remote endpoints.
@@ -19,23 +19,25 @@ The following principles have been derived from OWASP principles applicable to m
 * MSTG-CRYPTO-4 The app does not use cryptographic protocols or algorithms that are widely considered deprecated for security purposes.
 * MSTG-CRYPTO-5 The app doesn’t re-use the same cryptographic key for multiple purposes.
 * MSTG-CRYPTO-6 All random values are generated using a sufficiently secure random number generator.
-* MSTG-NETWORK-1 Data is encrypted on the network using TLS. The secure channel is used consistently throughout the app.
+* MSTG-NETWORK-1 Data is encrypted on the network using Transport Level Security (TLS). The secure channel is used consistently throughout the app.
 * MSTG-NETWORK-2 The TLS settings are in line with current best practices, or as close as possible if the mobile operating system does not support the recommended standards.
-* MSTG-NETWORK-3 The app verifies the X.509 certificate of the remote endpoint when the secure channel is established. Only certificates signed by a trusted CA are accepted.
+* MSTG-NETWORK-3 The app verifies the X.509 certificate of the remote endpoint when the secure channel is established. Only certificates signed by a trusted Certificate Authority (CA) are accepted.
 * MSTG-NETWORK-6 The app only depends on up-to-date connectivity and security libraries.
 * MSTG-PLATFORM-1 The app only requests the minimum set of permissions necessary
-* MSTG-PLATFORM-2 All inputs from external sources and the user are validated and if necessary sanitized. This includes data received via the UI, IPC mechanisms such as intents, custom URLs, and network sources.
+* MSTG-PLATFORM-2 All inputs from external sources and the user are validated and if necessary sanitized. This includes data received via the User Interface (UI), Inter-Process Communication (IPC) mechanisms such as intents, custom Uniform Resource Locators (URLs), and network sources.
 * MSTG-PLATFORM-3 The app does not export sensitive functionality via custom URL schemes, unless these mechanisms are properly protected.
 * MSTG-PLATFORM-4 The app does not export sensitive functionality through IPC facilities, unless these mechanisms are properly protected.
-* MSTG-PLATFORM-8 Object deserialization, if any, is implemented using safe serialization APIs.
+* MSTG-PLATFORM-8 Object deserialization, if any, is implemented using safe serialization Application Programming Interfaces (APIs).
 * MSTG-CODE-1 The app is signed and provisioned with a valid certificate, of which the private key is properly protected.
 * MSTG-CODE-2 The app has been built in release mode, with settings appropriate for a release build (e.g. non-debuggable).
+* MSTG-CODE-3 Debugging symbols have been removed from native binaries.
 * MSTG-CODE-4 Debugging code and developer assistance code (e.g. test code, backdoors, hidden settings) have been removed. The app does not log verbose errors or debugging messages.
 * MSTG-CODE-5 All third party components used by the mobile app, such as libraries and frameworks, are identified, and checked for known vulnerabilities.
 * MSTG-CODE-6 The app catches and handles possible exceptions.
+* MSTG-CODE-7 Error handling logic in security controls denies access by default.
 * MSTG-CODE-8 In unmanaged code, memory is allocated, freed and used securely.
-* MSTG-CODE-9 Free security features offered by the toolchain, such as byte-code minification, stack protection, PIE support and automatic reference counting, are activated.
-* MSTG-STORAGE-1: System credential storage facilities need to be used to store sensitive data, such as PII, user credentials or cryptographic keys.
+* MSTG-CODE-9 Free security features offered by the toolchain, such as byte-code minification, stack protection, Position Independent Executable (PIE) support and automatic reference counting, are activated.
+* MSTG-STORAGE-1: System credential storage facilities need to be used to store sensitive data, such as Personally Identifiable Information (PII), user credentials or cryptographic keys.
 * MSTG-STORAGE-2: No sensitive data should be stored outside of the app container or system credential storage facilities.
 * MSTG-STORAGE-3: No sensitive data is written to application logs.
 * MSTG-STORAGE-4: No sensitive data is shared with third parties unless it is a necessary part of the architecture.
