@@ -45,11 +45,12 @@
 * Healthcare authorities have the technical ability retract data they have published
 * Retention periods for both unaggregated, and aggregated data stored in SafePlaces shall be configurable and enforced technically
 * When new datasets are published from SafePlaces, older data that has passed it's retention period will be removed from the new published dataset.
-* It is noted that although data will be aggregated, obfuscated, and only published for a limited amount of time, it may not be possible to guarantee that no copies of that data exist after the retention period has passed.
+* It is noted that although data will be aggregated, obfuscated, and only published for a limited amount of time, it may not be possible to guarantee that no copies of that data exist after the retention period has passed
 
 # Other Technical Measures
 
 * Data shall be as accurate as possible
+* To protect the system against false-positive-claim attacks, the solution will establish an authorisation process between the contact tracer and the diagnosed user
 * Privacy shall be as inclusive as possible, and this includes making the application work just as well for people with different abilities, wherever technically possible, and based on [W3C/WAI](https://www.w3.org/WAI/) standards
 * Measures shall be taken to avoid algorithms leading to unfair outcomes for people based on immutable characteristics of people (e.g. race, gender, age) or socio-economic class This includes proxy variables such as location, which may infer these items
 * The potential risk that information about people may be exposed or misused as a result of a contact tracing system must be proportional to the public health benefits of that system for combating the epidemic. The analysis of proportionality should take into account the efficacy of the contact tracing app at reducing the incidence of new cases and factors including but not limited to scope and purpose of the contact tracing app, type(s) of data collected, collection processes, sharing, retention, and deletion of data

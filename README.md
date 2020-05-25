@@ -8,7 +8,7 @@ We believe that transparency in our software is an important part of ensuring se
 * Issues relating to deviations from our Principles referenced above and known external standards.
 * Related documents, such as Data Privacy Impact Assessments
 
-This document should be considered the guiding requirements that Path Check Inc expects to implement, and will verify against.
+This document should be considered the guiding requirements that Path Check Inc expects to implement, and will verify against.  It does not currently consider self-reporting of symptoms, or the implementation of a Bluetooth based proximity system.
 
 # Contributions
 
