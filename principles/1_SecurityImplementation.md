@@ -5,7 +5,7 @@ This document makes heavy use of the OWASP (Open Web Application Security Projec
 ## Safe Paths
 
 ### OWASP Principles
-The following principles have been derived from OWASP principles applicable to mobile applications, and applicable to the Safe Paths app:
+The following principles have been derived from [OWASP principles applicable to mobile applications](https://owasp.org/www-project-mobile-security-testing-guide/), and applicable to the Safe Paths app:
 
 * MSTG-ARCH-1 All app components are identified and known to be needed.
 * MSTG-ARCH-2 Security controls are never enforced only on the client side, but on the respective remote endpoints.
@@ -66,7 +66,7 @@ The following principles have been derived from OWASP principles applicable to m
 * Aggregated data published from Safe Places shall be obfuscated or encrypted so that concern points cannot be accessed
 
 ### OWASP Principles
-Based on [this OWASP document](https://github.com/OWASP/ASVS/raw/master/4.0/OWASP%20Application%20Security%20Verification%20Standard%204.0-en.pdf) the correct principles have been included.  Specifically that includes Cookie-based Session Management, Authentication Verification, and Access Control related requirements.
+Based on [this OWASP document](https://github.com/OWASP/ASVS/raw/master/4.0/OWASP%20Application%20Security%20Verification%20Standard%204.0-en.pdf) the correct principles have been included.  Specifically that includes Cookie-based Session Management and SOAP Web Service Verification Requirements (as we are using Tokens, and REST), Communications Security Requirements, Authentication Verification, SSRF Protection Requirements, Deployed Application Integrity Controls, Access Control, Build and Validate HTTP Request Header Requirements related requirements (as these are the responsiblity of the implementing Healthcare Authority).
 
 #### 1.1 Secure Software Development Lifecycle Requirements
 * Verify the use of threat modeling for every design change or sprint planning to identify threats, plan for countermeasures, facilitate appropriate risk responses, and guide security testing
@@ -289,3 +289,105 @@ sensitive data.
 random data.
 * Verify that sensitive or private information that is required to be encrypted, is encrypted using approved algorithms that provide both confidentiality and
 integrity.
+
+#### 9.1 Communications Security Requirements
+
+* Verify that secured TLS is used for all client connectivity, and does not fall back to insecure or unencrypted protocols
+* Verify using online or up to date TLS testing tools that only strong algorithms, ciphers, and protocols are enabled, with the strongest algorithms and ciphers set as preferred.
+* Verify that old versions of SSL and TLS protocols, algorithms, ciphers, and configuration are disabled, such as SSLv2, SSLv3, or TLS 1.0 and TLS 1.1. The latest version of TLS should be the preferred cipher suite.
+
+#### 10.1 Code Integrity Controls
+* Verify that a code analysis tool is in use that can detect potentially malicious
+code, such as time functions, unsafe file operations and network connections.
+
+#### 10.2 Malicious Code Search
+* Verify that the application source code and third party libraries do not contain unauthorized phone home or data collection capabilities. Where such functionality exists, obtain the user's permission for it to operate before collecting any data
+* Verify that the application does not ask for unnecessary or excessive permissions to privacy related features or sensors, such as contacts, cameras, microphones, or location.
+* Verify that the application source code and third party libraries do not contain back doors, such as hard-coded or additional undocumented accounts or keys,
+code obfuscation, undocumented binary blobs, rootkits, or anti-debugging, insecure debugging features, or otherwise out of date, insecure, or hidden functionality that could be used maliciously if discovered.
+* Verify that the application source code and third party libraries does not contain time bombs by searching for date and time related functions.
+* Verify that the application source code and third party libraries does not contain malicious code, such as salami attacks, logic bypasses, or logic bombs.
+* Verify that the application source code and third party libraries do not contain Easter eggs or any other potentially unwanted functionality.
+
+#### 11.1 Business Logic Security Requirements
+* Verify the application will only process business logic flows for the same user in sequential step order and without skipping steps.
+* Verify the application will only process business logic flows with all steps being processed in realistic human time, i.e. transactions are not submitted too quickly.
+* Verify the application has appropriate limits for specific business actions or transactions which are correctly enforced on a per user basis.
+* Verify the application has sufficient anti-automation controls to detect and protect against data exfiltration, excessive business logic requests, excessive file uploads or denial of service attacks.
+* Verify the application has business logic limits or validation to protect against likely business risks or threats, identified using threat modelling or similar methodologies.
+* Verify the application does not suffer from "time of check to time of use" (TOCTOU) issues or other race conditions for sensitive operations.
+* Verify the application monitors for unusual events or activity from a business logic perspective. For example, attempts to perform actions out of order or
+actions which a normal user would never attempt.
+* Verify the application has configurable alerting when automated attacks or unusual activity is detected.
+
+#### 12.1 File Upload Requirements
+* Verify that the application will not accept large files that could fill up storage or cause a denial of service attack.
+* Verify that compressed files are checked for "zip bombs" - small input files that will decompress into huge files thus exhausting file storage limits.
+* Verify that a file size quota and maximum number of files per user is enforced to ensure that a single user cannot fill up the storage with too many files, or excessively large files.
+
+#### 12.2 File Integrity Requirements
+* Verify that files obtained from untrusted sources are validated to be of expected type based on the file's content.
+
+#### 12.3 File execution Requirements
+* Verify that user-submitted filename metadata is not used directly with system or framework file and URL API to protect against path traversal.
+* Verify that user-submitted filename metadata is validated or ignored to prevent the disclosure, creation, updating or removal of local files (LFI).
+* Verify that user-submitted filename metadata is validated or ignored to prevent the disclosure or execution of remote files (RFI), which may also lead to SSRF.
+* Verify that the application protects against reflective file download (RFD) by validating or ignoring user-submitted filenames in a JSON, JSONP, or URL parameter, the response Content-Type header should be set to text/plain, and the Content-Disposition header should have a fixed filename.
+* Verify that untrusted file metadata is not used directly with system API or libraries, to protect against OS command injection.
+* Verify that the application does not include and execute functionality from untrusted sources, such as unverified content distribution networks, JavaScript libraries, node npm libraries, or server-side DLLs.
+
+#### 12.4 File Storage Requirements
+* Verify that files obtained from untrusted sources are stored outside the web root, with limited permissions, preferably with strong validation.
+* Verify that files obtained from untrusted sources are scanned by antivirus scanners to prevent upload of known malicious content.
+
+#### 12.5 File Download Requirements
+* Verify that the web tier is configured to serve only files with specific file extensions to prevent unintentional information and source code leakage. For
+example, backup files (e.g. .bak), temporary working files (e.g. .swp), compressed files (.zip, .tar.gz, etc) and other extensions commonly used by editors should be blocked unless required.  __note this should form guidance to HAs, rather than implemented configuration__
+* Verify that direct requests to uploaded files will never be executed as HTML/JavaScript content.
+
+#### 13.1 Generic Web Service Security Verification Requirements
+* Verify that all application components use the same encodings and parsers to avoid parsing attacks that exploit different URI or file parsing behavior that could be used in SSRF and RFI attacks.
+* Verify that access to administration and management functions is limited to authorized administrators.
+* Verify API URLs do not expose sensitive information, such as the API key, session tokens etc.
+* Verify that authorization decisions are made at both the URI, enforced by programmatic or declarative security at the controller or router, and at the
+resource level, enforced by model-based permissions.
+* Verify that requests containing unexpected or missing content types are rejected with appropriate headers (HTTP response status 406 Unacceptable or 415
+Unsupported Media Type).
+
+#### 13.2 RESTful Web Service Verification Requirements
+* Verify that enabled RESTful HTTP methods are a valid choice for the user or action, such as preventing normal users using DELETE or PUT on protected API or
+resources.
+* Verify that JSON schema validation is in place and verified before accepting input.
+* Verify that RESTful web services that utilize cookies are protected from Cross-Site Request Forgery via the use of at least one or more of the following: triple or double submit cookie pattern (see references), CSRF nonces, or ORIGIN request header checks.
+* Verify that REST services have anti-automation controls to protect against excessive calls, especially if the API is unauthenticated.
+* Verify that REST services explicitly check the incoming Content-Type to be the expected one, such as application/xml or application/JSON.
+* Verify that the message headers and payload are trustworthy and not modified in transit. Requiring strong encryption for transport (TLS only) may be sufficient in many cases as it provides both confidentiality and integrity protection. Per-message digital signatures can provide additional assurance on top of the transport protections for high-security applications but bring with them additional complexity and risks to weigh against the benefits.
+
+#### 13.4 GraphQL and other Web Service Data Layer Security Requirements
+* Verify that query whitelisting or a combination of depth limiting and amount limiting should be used to prevent GraphQL or data layer expression denial of
+service (DoS) as a result of expensive, nested queries. For more advanced scenarios, query cost analysis should be used.
+* Verify that GraphQL or other data layer authorization logic should be implemented at the business logic layer instead of the GraphQL layer.
+
+#### 14.2 Dependency
+* Verify that all components are up to date, preferably using a dependency checker during build or compile time.
+* Verify that all unneeded features, documentation, samples, configurations are removed, such as sample applications, platform documentation, and default or
+example users.
+* Verify that if application assets, such as JavaScript libraries, CSS stylesheets or web fonts, are hosted externally on a content delivery network (CDN) or external provider, Subresource Integrity (SRI) is used to validate the integrity of the asset.
+* Verify that third party components come from pre-defined, trusted and continually maintained repositories.
+* Verify that an inventory catalog is maintained of all third party libraries in use.
+* Verify that the attack surface is reduced by sandboxing or encapsulating third party libraries to expose only the required behaviour into the application.
+
+#### 14.3 Unintended Security Disclosure Requirements
+* Verify that web or application server and framework error messages are configured to deliver user actionable, customized responses to eliminate any
+unintended security disclosures.
+* Verify that web or application server and application framework debug modes are disabled in production to eliminate debug features, developer consoles, and
+unintended security disclosures.
+* Verify that the HTTP headers or any part of the HTTP response do not expose detailed version information of system components.
+* Verify that every HTTP response contains a content type header specifying a safe character set (e.g., UTF-8, ISO 8859-1).
+* Verify that all API responses contain Content-Disposition: attachment;filename="api.json" (or other appropriate filename for the content type).
+* Verify that a content security policy (CSPv2) is in place that helps mitigate impact for XSS attacks like HTML, DOM, JSON, and JavaScript injection vulnerabilities.
+* Verify that all responses contain X-Content-Type-Options: nosniff. ✓ ✓ ✓ 116
+* Verify that HTTP Strict Transport Security headers are included on all responses and for all subdomains, such as Strict-Transport-Security: max-age=15724800;includeSubdomains.
+* Verify that a suitable "Referrer-Policy" header is included, such as "no-referrer" or "same-origin".
+* Verify that a suitable X-Frame-Options or Content-Security-Policy: frame-ancestors header is in use for sites where content should not be embedded in a
+third-party site.
