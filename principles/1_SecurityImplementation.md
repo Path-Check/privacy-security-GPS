@@ -1,9 +1,11 @@
 # Introduction
 
+This document makes heavy use of the OWASP (Open Web Application Security Project) project.  It is best read in conjuction with the OWASP deliverables that explain acronyms, reference test procedures, and provide a glossary.
+
 ## Safe Paths
 
 ### OWASP Principles
-The following principles have been derived from OWASP (Open Web Application Security Project) principles applicable to mobile applications, and applicable to the Safe Paths app:
+The following principles have been derived from OWASP principles applicable to mobile applications, and applicable to the Safe Paths app:
 
 * MSTG-ARCH-1 All app components are identified and known to be needed.
 * MSTG-ARCH-2 Security controls are never enforced only on the client side, but on the respective remote endpoints.
@@ -57,7 +59,6 @@ The following principles have been derived from OWASP (Open Web Application Secu
 ## Safe Places
 
 ### General
-
 * Whilst Safe Places deployment security best practices are the responsibility of the healthcare authority, developers shall make every effort to encourage healthcare authorities to deploy in a secure way, through documentation and technical means
 * Access to sensitive data shall be logged and made visible to users
 * Security and data access logs shall be immutable
@@ -65,11 +66,9 @@ The following principles have been derived from OWASP (Open Web Application Secu
 * Aggregated data published from Safe Places shall be obfuscated or encrypted so that concern points cannot be accessed
 
 ### OWASP Principles
-
-Based on [this OWASP document](https://github.com/OWASP/ASVS/raw/master/4.0/OWASP%20Application%20Security%20Verification%20Standard%204.0-en.pdf)
+Based on [this OWASP document](https://github.com/OWASP/ASVS/raw/master/4.0/OWASP%20Application%20Security%20Verification%20Standard%204.0-en.pdf) the correct principles have been included.  Specifically that includes Cookie-based Session Management, Authentication Verification, and Access Control related requirements.
 
 #### 1.1 Secure Software Development Lifecycle Requirements
-
 * Verify the use of threat modeling for every design change or sprint planning to identify threats, plan for countermeasures, facilitate appropriate risk responses, and guide security testing
 * Verify documentation and justification of all the application's trust boundaries, components, and significant data flows
 * Verify definition and security analysis of the application's high-level architecture and all connected remote services
@@ -136,16 +135,157 @@ the uploaded file.
 applications, especially when they are performing sensitive or dangerous actions such as deserialization.
 * Verify the application does not use unsupported, insecure, or deprecated clientside technologies such as NSAPI plugins, Flash, Shockwave, ActiveX, Silverlight, NACL, or client-side Java applets.
 
-# 2.1 Password Security Requirements
-* Verify that user set passwords are at least 12 characters in length
-* Verify that passwords 64 characters or longer are permitted
-* Verify that passwords can contain spaces and truncation is not performed. Consecutive multiple spaces MAY optionally be coalesced
-* Verify that Unicode characters are permitted in passwords. A single Unicode code point is considered a character, so 12 emoji or 64 kanji characters should be valid and permitted
-* Verify users can change their password
-* Verify that password change functionality requires the user's current and new password
-* Verify that passwords submitted during account registration, login, and password change are checked against a set of breached passwords either locally (such as the top 1,000 or 10,000 most common passwords which match the system's password policy) or using an external API. If using an API a zero knowledge proof or other mechanism should be used to ensure that the plain text password is not sent or used in verifying the breach status of the password. If the password is breached, the application must require the user to set a new nonbreached password
-* Verify that a password strength meter is provided to help users set a stronger password
-* Verify that there are no password composition rules limiting the type of characters permitted. There should be no requirement for upper or lower case or numbers or special characters
-* Verify that there are no periodic credential rotation or password history requirements.
-* Verify that "paste" functionality, browser password helpers, and external password managers are permitted.
-* Verify that the user can choose to either temporarily view the entire masked password, or temporarily view the last typed character of the password on platforms that do not have this as native functionality.
+#### 2.10 Service Authentication Requirements
+* Verify that integration secrets do not rely on unchanging passwords, such as API keys or shared privileged accounts.
+* Verify that if passwords are required, the credentials are not a default account.
+* Verify that passwords are stored with sufficient protection to prevent offline recovery attacks, including local system access.
+* Verify passwords, integrations with databases and third-party systems, seeds and internal secrets, and API keys are managed securely and not included in the source code or stored within source code repositories. Such storage SHOULD resist offline attacks. The use of a secure software key store (L1), hardware
+trusted platform module (TPM), or a hardware security module (L3) is recommended for password storage.
+
+#### 3.1 Fundamental Session Management Requirements
+
+* Verify the application never reveals session tokens in URL parameters or error messages.
+
+#### 3.2 Session Binding Requirements
+
+* Verify the application generates a new session token on user authentication.
+* Verify that session tokens possess at least 64 bits of entropy.
+* Verify the application only stores session tokens in the browser using secure methods such as appropriately secured cookies (see section 3.4) or HTML 5 session storage.
+* Verify that session token are generated using approved cryptographic algorithms.
+
+#### 3.3 Session Logout and Timeout Requirements
+* Verify that logout and expiration invalidate the session token, such that the back button or a downstream relying party does not resume an authenticated session, including across relying parties.
+* If authenticators permit users to remain logged in, verify that re-authentication occurs periodically both when actively used or after an idle period.
+* Verify that the application terminates all other active sessions after a successful password change, and that this is effective across the application, federated login (if present), and any relying parties. ✓ ✓ 613 3.3.4 Verify that users are able to view and log out of any or all currently active sessions and device.
+* Verify that users are able to view and log out of any or all currently active sessions and devices.
+
+#### 3.5 Token Based Session Management
+* Verify the application does not treat OAuth and refresh tokens — on their own — as the presence of the subscriber and allows users to terminate trust relationships with linked applications.
+* Verify the application uses session tokens rather than static API secrets and keys, except with legacy implementations.
+* Verify that stateless session tokens use digital signatures, encryption, and other countermeasures to protect against tampering, enveloping, replay, null cipher, and key substitution attacks.
+
+#### 3.6 Re-authentication from a Federation or Assertion
+* Verify that relying parties specify the maximum authentication time to CSPs and that CSPs re-authenticate the subscriber if they haven't used a
+session within that period.
+* Verify that CSPs inform relying parties of the last authentication event, to allow RPs to determine if they need to re-authenticate the user.
+
+#### 3.7 Defenses Against Session Management Exploits
+* Verify the application ensures a valid login session or requires re-authentication or secondary verification before allowing any sensitive transactions or account modifications.
+
+#### 5.1 Input Validation Requirements
+* Verify that the application has defenses against HTTP parameter pollution attacks, particularly if the application framework makes no distinction about the source of request parameters (GET, POST, cookies, headers, or environment variables).
+* Verify that frameworks protect against mass parameter assignment attacks, or that the application has countermeasures to protect against unsafe parameter assignment, such as marking fields private or similar.
+* Verify that all input (HTML form fields, REST requests, URL parameters, HTTP headers, cookies, batch files, RSS feeds, etc) is validated using positive validation (whitelisting).
+* Verify that structured data is strongly typed and validated against a defined schema including allowed characters, length and pattern (e.g. credit card numbers or telephone, or validating that two related fields are reasonable, such as checking that suburb and zip/postcode match).
+* Verify that URL redirects and forwards only allow whitelisted destinations, or show a warning when redirecting to potentially untrusted content.
+
+#### 5.2 Sanitization and Sandboxing Requirements
+* Verify that all untrusted HTML input from WYSIWYG editors or similar is properly sanitized with an HTML sanitizer library or framework feature.
+* Verify that unstructured data is sanitized to enforce safety measures such as allowed characters and length.
+* Verify that the application sanitizes user input before passing to mail systems to protect against SMTP or IMAP injection.
+* Verify that the application avoids the use of eval() or other dynamic code execution features. Where there is no alternative, any user input being included
+must be sanitized or sandboxed before being executed.
+* Verify that the application protects against template injection attacks by ensuring that any user input being included is sanitized or sandboxed.
+* Verify that the application protects against SSRF attacks, by validating or sanitizing untrusted data or HTTP file metadata, such as filenames and URL input fields, use whitelisting of protocols, domains, paths and ports.
+* Verify that the application sanitizes, disables, or sandboxes user-supplied SVG scriptable content, especially as they relate to XSS resulting from inline scripts, and foreignObject.
+* Verify that the application sanitizes, disables, or sandboxes user-supplied scriptable or expression template language content, such as Markdown, CSS or
+XSL stylesheets, BBCode, or similar.
+
+#### 5.3 Output encoding and Injection Prevention Requirements
+* Verify that output encoding is relevant for the interpreter and context required. For example, use encoders specifically for HTML values, HTML attributes,
+JavaScript, URL Parameters, HTTP headers, SMTP, and others as the context requires, especially from untrusted inputs (e.g. names with Unicode or apostrophes, such as ねこ or O'Hara).
+* Verify that output encoding preserves the user's chosen character set and locale, such that any Unicode character point is valid and safely handled.
+* Verify that context-aware, preferably automated - or at worst, manual - output escaping protects against reflected, stored, and DOM based XSS.
+* Verify that data selection or database queries (e.g. SQL, HQL, ORM, NoSQL) use parameterized queries, ORMs, entity frameworks, or are otherwise protected
+from database injection attacks.
+* Verify that where parameterized or safer mechanisms are not present, context-specific output encoding is used to protect against injection attacks, such as the use of SQL escaping to protect against SQL injection.
+* Verify that the application projects against JavaScript or JSON injection attacks, including for eval attacks, remote JavaScript includes, CSP bypasses, DOM XSS, and JavaScript expression evaluation.
+* Verify that the application protects against LDAP Injection vulnerabilities, or that specific security controls to prevent LDAP Injection have been implemented.
+* Verify that the application protects against OS command injection and that operating system calls use parameterized OS queries or use contextual command
+line output encoding.
+* Verify that the application protects against Local File Inclusion (LFI) or Remote File Inclusion (RFI) attacks.
+* Verify that the application protects against XPath injection or XML injection attacks.
+
+#### 5.4 Memory, String, and Unmanaged Code Requirements
+Verify that the application uses memory-safe string, safer memory copy and
+pointer arithmetic to detect or prevent stack, buffer, or heap overflows. ✓ ✓ 120
+5.4.2 Verify that format strings do not take potentially hostile input, and are constant. ✓ ✓ 134
+5.4.3 Verify that sign, range, and input validation techniques are used to prevent
+integer overflows.
+
+#### 5.5 Deserialization Prevention Requirements
+* Verify that serialized objects use integrity checks or are encrypted to prevent hostile object creation or data tampering.
+* Verify that the application correctly restricts XML parsers to only use the most restrictive configuration possible and to ensure that unsafe features such as resolving external entities are disabled to prevent XXE.
+* Verify that deserialization of untrusted data is avoided or is protected in both custom code and third-party libraries (such as JSON, XML and YAML parsers).
+* Verify that when parsing JSON in browsers or JavaScript-based backends, JSON.parse is used to parse the JSON document. Do not use eval() to parse JSON.
+
+#### 6.1 Data Classification
+* Verify that regulated private data is stored encrypted while at rest, such as personally identifiable information (PII), sensitive personal information, or data assessed likely to be subject to EU's GDPR.
+* Verify that regulated health data is stored encrypted while at rest, such as medical records, medical device details, or de-anonymized research records.
+* Verify that regulated financial data is stored encrypted while at rest, such as financial accounts, defaults or credit history, tax records, pay history,
+beneficiaries, or de-anonymized market or research records.
+
+#### 6.2 Algorithms
+* Verify that all cryptographic modules fail securely, and errors are handled in a way that does not enable Padding Oracle attacks.
+* Verify that industry proven or government approved cryptographic algorithms, modes, and libraries are used, instead of custom coded cryptography.
+* Verify that encryption initialization vector, cipher configuration, and block modes are configured securely using the latest advice.
+* Verify that random number, encryption or hashing algorithms, key lengths, rounds, ciphers or modes, can be reconfigured, upgraded, or swapped at any
+time, to protect against cryptographic breaks.
+* Verify that known insecure block modes (i.e. ECB, etc.), padding modes (i.e. PKCS#1 v1.5, etc.), ciphers with small block sizes (i.e. Triple-DES, Blowfish, etc.), and weak hashing algorithms (i.e. MD5, SHA1, etc.) are not used unless required for backwards compatibility.
+* Verify that nonces, initialization vectors, and other single use numbers must not be used more than once with a given encryption key. The method of generation must be appropriate for the algorithm being used. 6.2.7 Verify that encrypted data is authenticated via signatures, authenticated cipher modes, or HMAC to ensure that ciphertext is not altered by an unauthorized party.
+* Verify that all cryptographic operations are constant-time, with no 'short-circuit' operations in comparisons, calculations, or returns, to avoid leaking information.
+
+#### 6.3 Random Values
+* Verify that all random numbers, random file names, random GUIDs, and random strings are generated using the cryptographic module's approved
+cryptographically secure random number generator when these random values are intended to be not guessable by an attacker. ✓ ✓ 338
+* Verify that random GUIDs are created using the GUID v4 algorithm, and a cryptographically-secure pseudo-random number generator (CSPRNG). GUIDs created using other pseudo-random number generators may be predictable.
+* Verify that random numbers are created with proper entropy even when the application is under heavy load, or that the application degrades gracefully in such circumstances.
+
+#### 6.4 Secret Management
+* Verify that a secrets management solution such as a key vault is used to securely create, store, control access to and destroy secrets.
+* Verify that key material is not exposed to the application but instead uses an isolated security module like a vault for cryptographic operations.
+
+
+#### 7.1 Log Content Requirements
+* Verify that the application does not log credentials or payment details. Session tokens should only be stored in logs in an irreversible, hashed form.
+* Verify that the application does not log other sensitive data as defined under local privacy laws or relevant security policy.
+* Verify that the application logs security relevant events including successful and failed authentication events, access control failures, deserialization failures and input validation failures.
+* Verify that each log event includes necessary information that would allow for a detailed investigation of the timeline when an event happens.
+
+#### 7.2 Log Processing Requirements
+* Verify that all authentication decisions are logged, without storing sensitive session identifiers or passwords. This should include requests with relevant
+metadata needed for security investigations.
+* Verify that all access control decisions can be logged and all failed decisions are logged. This should include requests with relevant metadata needed for security investigations.
+
+#### 7.3 Log Protection Requirements
+* Verify that the application appropriately encodes user-supplied data to prevent log injection.
+* Verify that all events are protected from injection when viewed in log viewing software.
+* Verify that security logs are protected from unauthorized access and modification.
+* Verify that time sources are synchronized to the correct time and time zone.  Strongly consider logging only in UTC if systems are global to assist with post-incident forensic analysis.
+
+#### 7.4 Error Handling
+* Verify that a generic message is shown when an unexpected or security sensitive error occurs, potentially with a unique ID which support personnel can use to investigate.
+* Verify that exception handling (or a functional equivalent) is used across the codebase to account for expected and unexpected error conditions.
+* Verify that a "last resort" error handler is defined which will catch all unhandled exceptions.
+
+#### 8.1 General Data Protection
+* Verify the application protects sensitive data from being cached in server components such as load balancers and application caches.
+* Verify that all cached or temporary copies of sensitive data stored on the server are protected from unauthorized access or purged/invalidated after the
+authorized user accesses the sensitive data.
+* Verify the application minimizes the number of parameters in a request, such as hidden fields, Ajax variables, cookies and header values.
+* Verify the application can detect and alert on abnormal numbers of requests, such as by IP, user, total per hour or day, or whatever makes sense for the application.
+
+#### 8.2 Client-side Data Protection
+* Verify the application sets sufficient anti-caching headers so that sensitive data is not cached in modern browsers.
+* Verify that data stored in client side storage (such as HTML5 local storage, session storage, IndexedDB, regular cookies or Flash cookies) does not contain sensitive data or PII.
+* Verify that authenticated data is cleared from client storage, such as the browser DOM, after the client or session is terminated.
+
+#### 8.3 Sensitive Private Data
+__Note that some elements of this section have not been included, as they are privacy related and covered in elsewhere.__
+
+* Verify that sensitive data is sent to the server in the HTTP message body or headers, and that query string parameters from any HTTP verb do not contain
+sensitive data.
+* Verify that sensitive information contained in memory is overwritten as soon as it is no longer required to mitigate memory dumping attacks, using zeroes or
+random data.
+* Verify that sensitive or private information that is required to be encrypted, is encrypted using approved algorithms that provide both confidentiality and
+integrity.
