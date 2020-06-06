@@ -43,6 +43,7 @@ __Additionally, checked 5 sequential tokens for entropy.  I used the script in t
 __Failed this test it is [stored in local storage instead of session](https://pathcheck.atlassian.net/browse/PLACES-323) and [doesn't have a fingerprint](https://pathcheck.atlassian.net/browse/PLACES-324)__
 
 * Verify that session token are generated using approved cryptographic algorithms.
+
 __HMAC 256 is used as recommended by the OWASP cheat sheet__
 
 
@@ -53,7 +54,7 @@ __[Failed and raised as jira](https://pathcheck.atlassian.net/browse/PLACES-325)
 
 * If authenticators permit users to remain logged in, verify that re-authentication occurs periodically both when actively used or after an idle period
 
-__Observed in the (code)[https://github.com/Path-Check/safeplaces-backend/blob/253da374c84bf1921edc5e4bc19ce19f9d726666/app/api/auth/controller.js] that this is set to 1 hr__
+__Observed in the [code](https://github.com/Path-Check/safeplaces-backend/blob/253da374c84bf1921edc5e4bc19ce19f9d726666/app/api/auth/controller.js) that this is set to 1 hr__
 
 * Verify that the application terminates all other active sessions after a successful password change, and that this is effective across the application, federated login (if present), and any relying parties.
 
