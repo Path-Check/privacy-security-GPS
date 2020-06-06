@@ -108,7 +108,7 @@ policy compliance
 * Verify that all sensitive data is identified and classified into protection levels
 * Verify that all protection levels have an associated set of protection requirements, such as encryption requirements, integrity requirements, retention, privacy and other confidentiality requirements, and that these are applied in the architecture
 
-#### V1.9 Communications Architectural Requirements
+#### 1.9 Communications Architectural Requirements
 * Verify the application encrypts communications between components, particularly when these components are in different containers, systems, sites, or
 cloud providers
 * Verify that application components verify the authenticity of each side in a communication link to prevent person-in-the-middle attacks. For example, application components should validate TLS certificates and chains
@@ -138,7 +138,6 @@ applications, especially when they are performing sensitive or dangerous actions
 #### 2.10 Service Authentication Requirements
 * Verify that integration secrets do not rely on unchanging passwords, such as API keys or shared privileged accounts.
 * Verify that if passwords are required, the credentials are not a default account.
-* Verify that passwords are stored with sufficient protection to prevent offline recovery attacks, including local system access.
 * Verify passwords, integrations with databases and third-party systems, seeds and internal secrets, and API keys are managed securely and not included in the source code or stored within source code repositories. Such storage SHOULD resist offline attacks. The use of a secure software key store (L1), hardware
 trusted platform module (TPM), or a hardware security module (L3) is recommended for password storage.
 
@@ -161,7 +160,6 @@ trusted platform module (TPM), or a hardware security module (L3) is recommended
 * Verify that users are able to view and log out of any or all currently active sessions and devices.
 
 #### 3.5 Token Based Session Management
-* Verify the application does not treat OAuth and refresh tokens — on their own — as the presence of the subscriber and allows users to terminate trust relationships with linked applications.
 * Verify the application uses session tokens rather than static API secrets and keys, except with legacy implementations.
 * Verify that stateless session tokens use digital signatures, encryption, and other countermeasures to protect against tampering, enveloping, replay, null cipher, and key substitution attacks.
 
