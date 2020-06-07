@@ -3,7 +3,7 @@ Privacy for Location Data in Safe Paths
 
 Privacy is one of our core values, and we aim to provide as much privacy as possible to users of the app.
 
-We believe that it is possible to deliver location-based exposure notifications to users with an absolutely minimal privacy impact. This paper explains the various measures that we are taking, and plan to take in future, to keep that privacy risk to an absolute minimum.
+We believe that it is possible to deliver location-based exposure notifications to users with an absolutely minimal privacy impact. This document explains the various measures that we are taking, and plan to take in future, to keep that privacy risk to an absolute minimum.
 
 Privacy Goals
 -------------
@@ -129,7 +129,7 @@ However, our expected accuracy of location measurements is only \~10m. Allowing 
 
 With the app having to compute 50x as many hashes, we have to reduce the cost of the slow hash to compensate, and this effectively eliminates the benefits of the increased entropy.
 
-Although we have nor ruled out a move to 9 character geohashes in future (as it would give us slightly more accurate matching, and therefore reduced false positives), we have not yet established a clear justification for the increased complexity (and it may be better to invest the effort into even more secure approaches - as described below).
+Although we have not ruled out a move to 9 character geohashes in future (as it would give us slightly more accurate matching, and therefore reduced false positives), we have not yet established a clear justification for the increased complexity (and it may be better to invest the effort into even more secure approaches - as described below).
 
 The result of the above is that our current implementation uses 8 character geohashes.
 
@@ -145,7 +145,7 @@ The definition of a "nearby" geohash is any geohash that has a point within 10m 
 
 On average, there will be 2.3 such geohashes, though the number is any given case could vary from 1 to 6 (and possibly even more in very northern or southern latitudes).
 
-This results in a match area of around 1660 sqm at the equator, 1200 sqm at 45 degrees north, so approximately the same area as a 2om radius circle, but with a slightly less predictable shape.
+This results in a match area of around 1660 sqm at the equator, 1200 sqm at 45 degrees north, so approximately the same area as a 20m radius circle, but with a slightly less predictable shape.
 
 ![GeohashDistanceChart](..\images\GeohashDistanceChart.png)
 
@@ -159,7 +159,7 @@ By moving to 9 character geohashes (as discussed above), we could bring the matc
 
 Due to battery constraints (and to a lesser extent, concerns about bandwidth and storage), we record a location data point only once every 5 minutes.
 
-There is no synchronization between the times at which two users record their location information, therefore we must consider two point to match if they fall within 5 minutes of each other.
+There is no synchronization between the times at which two users record their location information, therefore we must consider two points to match if they fall within 5 minutes of each other.
 
 However, with the hashing of published data, the published timestamp is itself approximated by a 5 minute time window.
 
@@ -214,7 +214,7 @@ At this point in time, we have not attempted to obfuscate any of the code, or th
 
 We are well aware that code obfuscation can easily be reversed (or that our open source obfuscated code could simply be lifted and used to encode hashes, without even de-obfuscating it).
 
-If we had a secure means of concealing the salty that is used, that would add considerably to the security of the published hashes, but we do not believe this is possible.
+If we had a secure means of concealing the salt that is used, that would add considerably to the security of the published hashes, but we do not believe this is possible.
 
 ### Overall level of protection
 
@@ -249,14 +249,14 @@ Relating this to our privacy goals articulated above
     
 -   There is, unfortunately, a vulnerability for venues where diagnosed users have been - particularly in the case where an attacker has in mind a small area and a narrow time window, which they wish to evaluate for points of concern.
 
-However, while such attacks are possible, it nevertheless will take significant technical skill and effort to conduct such an attack, and the rewards are fairly minimal. Our expectation is that this will lead to few such attacks will be undertaken, and that this will be a negligible channel for disclosure of information about which venues were attended by people later diagnoses with COVID.
+However, while such attacks are possible, it nevertheless will take significant technical skill and effort to conduct such an attack, and the rewards are fairly minimal. Our expectation is that this will lead to few such attacks being undertaken, and that this will be a negligible channel for disclosure of information about which venues were attended by people later diagnosed with COVID.
 
 In practice, we expect that the level of information leaked by this channel will be negligible, as compared to the level of information leaked through informal networks of local gossip.
 
 Some Clarifying Points on Efficacy
 ----------------------------------
 
-The main purpose of this article is to present our approach to data privacy. However some of the points raised here may raised broader concerns around efficacy of location-based exposure notifications.
+The main purpose of this article is to present our approach to data privacy. However some of the points raised here may raise broader concerns around efficacy of location-based exposure notifications.
 
 Without covering these issues comprehensively, here are some high-level responses to some concerns that may have arisen.
 
