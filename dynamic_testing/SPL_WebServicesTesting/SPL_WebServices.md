@@ -77,3 +77,7 @@ __Verified__
 * Verify that stateless session tokens use digital signatures, encryption, and other countermeasures to protect against tampering, enveloping, replay, null cipher, and key substitution attacks.
 
 __Marking as failed due to issues mentioned above__
+
+
+## Other
+In addition to the OWASP principles, threat modelling activity identified that a rogue contact tracer who knows an access code, could use curl / postman to send additional data point unbeknownst to the patient.  A specific test was conducted to confirm this was not possible.  Data was sent twice to the upload API using the same access code, and it failed the second time with a 403 error.
