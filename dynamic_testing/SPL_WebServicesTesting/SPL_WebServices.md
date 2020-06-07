@@ -17,7 +17,7 @@ __A username and password is provided for the authenticated APIs.  In this examp
 
 * Verify that if passwords are required, the credentials are not a default account.
 
-__Verified with environments team that they specifically added the user__
+__Verified with environments team that they specifically added the user, however it is also in the default settings for the LDAP reference server.  Given that this LDAP server is not execpted to be used, and is for testing purposes only, this has not been raised as an issue.__
 
 * Verify that passwords are stored with sufficient protection to prevent offline recovery attacks, including local system access.
 
