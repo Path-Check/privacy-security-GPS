@@ -73,10 +73,10 @@ Based on [this OWASP document](https://github.com/OWASP/ASVS/raw/master/4.0/OWAS
 * Verify documentation and justification of all the application's trust boundaries, components, and significant data flows
 * Verify definition and security analysis of the application's high-level architecture and all connected remote services
 * Verify implementation of centralized, simple (economy of design), vetted, secure, and reusable security controls to avoid duplicate, missing, ineffective, or insecure controls
-* Verify availability of a secure coding checklist, security requirements, guideline, or policy to all developers and testers
+* Verify availability of a secure coding checklist, security requirements, guideline, or policy to all developers and testers [![PASS](../images/pass.png?raw=true)](../README.md)
 
 #### 1.2 Authentication Architectural Requirements
-* Verify the use of unique or special low-privilege operating system accounts for all application components, services, and servers.
+* Verify the use of unique or special low-privilege operating system accounts for all application components, services, and servers.  [![PARTIALLY TRUE](../images/partial.png?raw=true)](https://pathcheck.atlassian.net/browse/PLACES-272)
 * Verify that communications between application components, including APIs, middleware and data layers, are authenticated. Components should have the least
 necessary privileges needed
 * Verify that the application uses a single vetted authentication mechanism that is known to be secure, can be extended to include strong authentication, and has sufficient logging and monitoring to detect account abuse or breaches
@@ -87,7 +87,7 @@ necessary privileges needed
 * Verify that the chosen access control solution is flexible enough to meet the application's needs
 * Verify enforcement of the principle of least privilege in functions, data files, URLs, controllers, services, and other resources. This implies protection against spoofing and elevation of privilege
 * Verify the application uses a single and well-vetted access control mechanism for accessing protected data and resources. All requests must pass through this single mechanism to avoid copy and paste or insecure alternative paths.
-* Verify that attribute or feature-based access control is used whereby the code checks the user's authorization for a feature/data item rather than just their role.  Permissions should still be allocated using roles
+* Verify that attribute or feature-based access control is used whereby the code checks the user's authorization for a feature/data item rather than just their role.  Permissions should still be allocated using roles ![](../images/pass.oos?raw=true)
 
 #### 1.5 Input and Output Architectural Requirements
 * Verify that input and output requirements clearly define how to handle and process data based on type, content, and applicable laws, regulations, and other
@@ -114,7 +114,7 @@ cloud providers
 * Verify that application components verify the authenticity of each side in a communication link to prevent person-in-the-middle attacks. For example, application components should validate TLS certificates and chains
 
 #### 1.10 Malicious Software Architectural Requirements
-* Verify that a source code control system is in use, with procedures to ensure that check-ins are accompanied by issues or change tickets. The source code control system should have access control and identifiable users to allow traceability of any changes
+* Verify that a source code control system is in use, with procedures to ensure that check-ins are accompanied by issues or change tickets. The source code control system should have access control and identifiable users to allow traceability of any changes [![PASS](../images/pass.png?raw=true)](https://pathcheck.atlassian.net/wiki/spaces/SA/pages/50824646/2.+Contribution+Guidelines)
 
 #### 1.11 Business Logic Architectural Requirements
 * Verify the definition and documentation of all application components in terms of the business or security functions they provide
@@ -122,18 +122,18 @@ cloud providers
 * Verify that all high-value business logic flows, including authentication, session management and access control are thread safe and resistant to time-of-check and time-of-use race conditions
 
 #### 1.12 Secure File Upload Architectural Requirements
-* Verify that user-uploaded files are stored outside of the web root.
+* Verify that user-uploaded files are stored outside of the web root
 * Verify that user-uploaded files - if required to be displayed or downloaded from the application - are served by either octet stream downloads, or from an unrelated domain, such as a cloud file storage bucket. Implement a suitable content security policy to reduce the risk from XSS vectors or other attacks from
-the uploaded file.
+the uploaded file
 
 #### 1.14 Configuration Architectural Requirements
-* Verify the segregation of components of differing trust levels through welldefined security controls, firewall rules, API gateways, reverse proxies, cloudbased security groups, or similar mechanisms.
-* Verify that if deploying binaries to untrusted devices makes use of binary signatures, trusted connections, and verified endpoints.
-* Verify that the build pipeline warns of out-of-date or insecure components and takes appropriate actions.
-* Verify that the build pipeline contains a build step to automatically build and verify the secure deployment of the application, particularly if the application infrastructure is software defined, such as cloud environment build scripts.
+* Verify the segregation of components of differing trust levels through welldefined security controls, firewall rules, API gateways, reverse proxies, cloudbased security groups, or similar mechanisms
+* Verify that if deploying binaries to untrusted devices makes use of binary signatures, trusted connections, and verified endpoints
+* Verify that the build pipeline warns of out-of-date or insecure components and takes appropriate actions
+* Verify that the build pipeline contains a build step to automatically build and verify the secure deployment of the application, particularly if the application infrastructure is software defined, such as cloud environment build scripts
 * Verify that application deployments adequately sandbox, containerize and/or isolate at the network level to delay and deter attackers from attacking other
-applications, especially when they are performing sensitive or dangerous actions such as deserialization.
-* Verify the application does not use unsupported, insecure, or deprecated clientside technologies such as NSAPI plugins, Flash, Shockwave, ActiveX, Silverlight, NACL, or client-side Java applets.
+applications, especially when they are performing sensitive or dangerous actions such as deserialization
+* Verify the application does not use unsupported, insecure, or deprecated clientside technologies such as NSAPI plugins, Flash, Shockwave, ActiveX, Silverlight, NACL, or client-side Java applets
 
 #### 2.10 Service Authentication Requirements
 * Verify that integration secrets do not rely on unchanging passwords, such as API keys or shared privileged accounts.
@@ -154,9 +154,10 @@ trusted platform module (TPM), or a hardware security module (L3) is recommended
 * Verify that session token are generated using approved cryptographic algorithms.
 
 #### 3.3 Session Logout and Timeout Requirements
-* Verify that logout and expiration invalidate the session token, such that the back button or a downstream relying party does not resume an authenticated session, including across relying parties.
-* If authenticators permit users to remain logged in, verify that re-authentication occurs periodically both when actively used or after an idle period.
-* Verify that the application terminates all other active sessions after a successful password change, and that this is effective across the application, federated login (if present), and any relying parties. ✓ ✓ 613 3.3.4 Verify that users are able to view and log out of any or all currently active sessions and device.
+* Verify that logout and expiration invalidate the session token, such that the back button or a downstream relying party does not resume an authenticated session, including across relying parties
+* If authenticators permit users to remain logged in, verify that re-authentication occurs periodically both when actively used or after an idle period
+* Verify that the application terminates all other active sessions after a successful password change, and that this is effective across the application, federated login (if present), and any relying parties.
+* Verify that users are able to view and log out of any or all currently active sessions and device
 * Verify that users are able to view and log out of any or all currently active sessions and devices.
 
 #### 3.5 Token Based Session Management
@@ -245,7 +246,6 @@ cryptographically secure random number generator when these random values are in
 * Verify that a secrets management solution such as a key vault is used to securely create, store, control access to and destroy secrets.
 * Verify that key material is not exposed to the application but instead uses an isolated security module like a vault for cryptographic operations.
 
-
 #### 7.1 Log Content Requirements
 * Verify that the application does not log credentials or payment details. Session tokens should only be stored in logs in an irreversible, hashed form.
 * Verify that the application does not log other sensitive data as defined under local privacy laws or relevant security policy.
@@ -276,19 +276,16 @@ authorized user accesses the sensitive data.
 * Verify the application can detect and alert on abnormal numbers of requests, such as by IP, user, total per hour or day, or whatever makes sense for the application.
 
 #### 8.2 Client-side Data Protection
-* Verify the application sets sufficient anti-caching headers so that sensitive data is not cached in modern browsers.
+* Verify the application sets sufficient anti-caching headers so that sensitive data is not cached in modern browsers [![PARTIALLY TRUE](../images/partial.png?raw=true)](https://pathcheck.atlassian.net/browse/PLACES-272)
 * Verify that data stored in client side storage (such as HTML5 local storage, session storage, IndexedDB, regular cookies or Flash cookies) does not contain sensitive data or PII.
 * Verify that authenticated data is cleared from client storage, such as the browser DOM, after the client or session is terminated.
 
 #### 8.3 Sensitive Private Data
 __Note that some elements of this section have not been included, as they are privacy related and covered in elsewhere.__
 
-* Verify that sensitive data is sent to the server in the HTTP message body or headers, and that query string parameters from any HTTP verb do not contain
-sensitive data.
-* Verify that sensitive information contained in memory is overwritten as soon as it is no longer required to mitigate memory dumping attacks, using zeroes or
-random data.
-* Verify that sensitive or private information that is required to be encrypted, is encrypted using approved algorithms that provide both confidentiality and
-integrity.
+* Verify that sensitive data is sent to the server in the HTTP message body or headers, and that query string parameters from any HTTP verb do not contain sensitive data.
+* Verify that sensitive information contained in memory is overwritten as soon as it is no longer required to mitigate memory dumping attacks, using zeroes or random data.
+* Verify that sensitive or private information that is required to be encrypted, is encrypted using approved algorithms that provide both confidentiality and integrity.
 
 #### 9.1 Communications Security Requirements
 
@@ -297,8 +294,7 @@ integrity.
 * Verify that old versions of SSL and TLS protocols, algorithms, ciphers, and configuration are disabled, such as SSLv2, SSLv3, or TLS 1.0 and TLS 1.1. The latest version of TLS should be the preferred cipher suite.
 
 #### 10.1 Code Integrity Controls
-* Verify that a code analysis tool is in use that can detect potentially malicious
-code, such as time functions, unsafe file operations and network connections.
+* Verify that a code analysis tool is in use that can detect potentially malicious code, such as time functions, unsafe file operations and network connections.
 
 #### 10.2 Malicious Code Search
 * Verify that the application source code and third party libraries do not contain unauthorized phone home or data collection capabilities. Where such functionality exists, obtain the user's permission for it to operate before collecting any data
@@ -379,15 +375,15 @@ example users.
 
 #### 14.3 Unintended Security Disclosure Requirements
 * Verify that web or application server and framework error messages are configured to deliver user actionable, customized responses to eliminate any
-unintended security disclosures.
+unintended security disclosures
 * Verify that web or application server and application framework debug modes are disabled in production to eliminate debug features, developer consoles, and
-unintended security disclosures.
-* Verify that the HTTP headers or any part of the HTTP response do not expose detailed version information of system components.
-* Verify that every HTTP response contains a content type header specifying a safe character set (e.g., UTF-8, ISO 8859-1).
+unintended security disclosures [![PARTIALLY TRUE](../images/partial.png?raw=true)](https://pathcheck.atlassian.net/browse/PLACES-272)
+* Verify that the HTTP headers or any part of the HTTP response do not expose detailed version information of system components
+* Verify that every HTTP response contains a content type header specifying a safe character set (e.g., UTF-8, ISO 8859-1)
 * Verify that all API responses contain Content-Disposition: attachment;filename="api.json" (or other appropriate filename for the content type).
 * Verify that a content security policy (CSPv2) is in place that helps mitigate impact for XSS attacks like HTML, DOM, JSON, and JavaScript injection vulnerabilities.
-* Verify that all responses contain X-Content-Type-Options: nosniff. ✓ ✓ ✓ 116
-* Verify that HTTP Strict Transport Security headers are included on all responses and for all subdomains, such as Strict-Transport-Security: max-age=15724800;includeSubdomains.
-* Verify that a suitable "Referrer-Policy" header is included, such as "no-referrer" or "same-origin".
+* Verify that all responses contain X-Content-Type-Options: nosniff. [![PARTIALLY TRUE](../images/partial.png?raw=true)](https://pathcheck.atlassian.net/browse/PLACES-272)
+* Verify that HTTP Strict Transport Security headers are included on all responses and for all subdomains, such as Strict-Transport-Security: max-age=15724800;includeSubdomains [![PARTIALLY TRUE](../images/partial.png?raw=true)](https://pathcheck.atlassian.net/browse/PLACES-272)
+* Verify that a suitable "Referrer-Policy" header is included, such as "no-referrer" or "same-origin" [![PARTIALLY TRUE](../images/partial.png?raw=true)](https://pathcheck.atlassian.net/browse/PLACES-272)
 * Verify that a suitable X-Frame-Options or Content-Security-Policy: frame-ancestors header is in use for sites where content should not be embedded in a
-third-party site.
+third-party site [![PARTIALLY TRUE](../images/partial.png?raw=true)](https://pathcheck.atlassian.net/browse/PLACES-272)
