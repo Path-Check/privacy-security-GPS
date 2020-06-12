@@ -36,7 +36,7 @@ __Checked that a new token is generated on each auth.  Checked the jsonwebtoken 
 
 * Verify that session tokens possess at least 64 bits of entropy.
 
-__Additionally, checked 5 sequential tokens for entropy.  I used the script in this folder called TokenEntropy.py to do this.  I discovered that 45-47 bits of entropy is present in each new token, rather than the required 64.  [Raised in Jira](https://pathcheck.atlassian.net/browse/PLACES-321)__
+__This proved complex and generated some debate.  I [reached out](https://twitter.com/adamleonsmith/status/1271108494645698560) to some security specialists who advised this was un-necessary and verifying that the encrpytion algorithm in use was not "none" was sufficient.  Therefore I ran a token through base 64 decoding and was able to see the algorithm used in the JWT header, which was HS256__
 
 * Verify the application only stores session tokens in the browser using secure methods such as appropriately secured cookies (see section 3.4) or HTML 5 session storage.
 
