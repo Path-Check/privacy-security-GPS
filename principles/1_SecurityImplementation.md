@@ -146,7 +146,7 @@ applications, especially when they are performing sensitive or dangerous actions
 #### 3.2 Session Binding Requirements
 
 * Verify the application generates a new session token on user authentication.  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
-* Verify that session tokens possess at least 64 bits of entropy.  [![FAIL](../images/fail.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* Verify that session tokens possess at least 64 bits of entropy.  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
 * Verify the application only stores session tokens in the browser using secure methods such as appropriately secured cookies (see section 3.4) or HTML 5 session storage.  [![FAIL](../images/fail.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
 * Verify that session token are generated using approved cryptographic algorithms.  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
 
