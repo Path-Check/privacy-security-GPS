@@ -50,7 +50,7 @@ All of the OWASP principles and checks that were static, e.g code review, were c
 
 ### Dynamic Review
 
-Secure Database - I wasn't able to gain access to the secure database, but a [process]() has since been identified so this can be conducted in future checks
+Secure Database - I wasn't able to gain access to the secure database, but a [process](https://gist.github.com/troach-sf/f257bb7b80e6dddd4f3bade81b7b1410) has since been identified so this can be conducted in future checks
 
 Legacy Databases - The RKStorage, logback.db and cordova_bg_geolocation.db SQL lite databases were examined.
 
