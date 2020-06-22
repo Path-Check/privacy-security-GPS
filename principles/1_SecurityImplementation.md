@@ -1,6 +1,6 @@
 # Introduction
 
-This document makes heavy use of the OWASP (Open Web Application Security Project) project.  It is best read in conjuction with the OWASP deliverables that explain acronyms, reference test procedures, and provide a glossary.
+This document makes heavy use of the OWASP (Open Web Application Security Project) project.  It is best read in conjuction with the OWASP deliverables that explain acronyms, reference test procedures, and provide a glossary.  Where a test result is recorded against a principle, the icon links to a test or issue report.
 
 ## Safe Paths
 

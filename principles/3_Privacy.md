@@ -1,5 +1,7 @@
 # Privacy
 
+Where a test result is recorded against a principle, the icon links to a test or issue report.
+
 ## Data Minimization
 
 * The minimum amount of data possible shall be collected, for the purposes for which it is gathered. Data that is not used in the disclosure to healthcare authorities should not be collected unless it is essential to the purposes of the application  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_PrivacyTesting/E2E_Privacy_Test_001.md)
