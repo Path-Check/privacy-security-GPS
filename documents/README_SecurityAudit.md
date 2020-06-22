@@ -1,4 +1,4 @@
-This summarises issues referred to in [Security Audit of the Safe Places Server and Application](./Security Audit of the Safe Places Server and Application.pdf)
+This summarises issue traceability in relation to [Security Audit of the Safe Places Server and Application](SecurityAuditSafePlacesServerandApplication.pdf)
 
 * Sidejacking risk is covered in this jira: https://pathcheck.atlassian.net/browse/PLACES-324 and https://pathcheck.atlassian.net/browse/PLACES-298
 * Local storage here: https://pathcheck.atlassian.net/browse/PLACES-346
