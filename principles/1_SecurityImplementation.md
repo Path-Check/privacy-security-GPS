@@ -108,7 +108,7 @@ policy compliance
 * Verify that all sensitive data is identified and classified into protection levels
 * Verify that all protection levels have an associated set of protection requirements, such as encryption requirements, integrity requirements, retention, privacy and other confidentiality requirements, and that these are applied in the architecture
 
-#### V1.9 Communications Architectural Requirements
+#### 1.9 Communications Architectural Requirements
 * Verify the application encrypts communications between components, particularly when these components are in different containers, systems, sites, or
 cloud providers
 * Verify that application components verify the authenticity of each side in a communication link to prevent person-in-the-middle attacks. For example, application components should validate TLS certificates and chains
@@ -136,11 +136,9 @@ applications, especially when they are performing sensitive or dangerous actions
 * Verify the application does not use unsupported, insecure, or deprecated clientside technologies such as NSAPI plugins, Flash, Shockwave, ActiveX, Silverlight, NACL, or client-side Java applets
 
 #### 2.10 Service Authentication Requirements
-* Verify that integration secrets do not rely on unchanging passwords, such as API keys or shared privileged accounts.
-* Verify that if passwords are required, the credentials are not a default account.
-* Verify that passwords are stored with sufficient protection to prevent offline recovery attacks, including local system access.
-* Verify passwords, integrations with databases and third-party systems, seeds and internal secrets, and API keys are managed securely and not included in the source code or stored within source code repositories. Such storage SHOULD resist offline attacks. The use of a secure software key store (L1), hardware
-trusted platform module (TPM), or a hardware security module (L3) is recommended for password storage.
+* Verify that integration secrets do not rely on unchanging passwords, such as API keys or shared privileged accounts. [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* Verify that if passwords are required, the credentials are not a default account.  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* Verify passwords, integrations with databases and third-party systems, seeds and internal secrets, and API keys are managed securely and not included in the source code or stored within source code repositories. Such storage SHOULD resist offline attacks. The use of a secure software key store (L1), hardware trusted platform module (TPM), or a hardware security module (L3) is recommended for password storage.  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
 
 #### 3.1 Fundamental Session Management Requirements
 
@@ -148,26 +146,23 @@ trusted platform module (TPM), or a hardware security module (L3) is recommended
 
 #### 3.2 Session Binding Requirements
 
-* Verify the application generates a new session token on user authentication.
-* Verify that session tokens possess at least 64 bits of entropy.
-* Verify the application only stores session tokens in the browser using secure methods such as appropriately secured cookies (see section 3.4) or HTML 5 session storage.
-* Verify that session token are generated using approved cryptographic algorithms.
+* Verify the application generates a new session token on user authentication.  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* Verify that session tokens possess at least 64 bits of entropy.  [![FAIL](../images/fail.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* Verify the application only stores session tokens in the browser using secure methods such as appropriately secured cookies (see section 3.4) or HTML 5 session storage.  [![FAIL](../images/fail.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* Verify that session token are generated using approved cryptographic algorithms.  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
 
 #### 3.3 Session Logout and Timeout Requirements
-* Verify that logout and expiration invalidate the session token, such that the back button or a downstream relying party does not resume an authenticated session, including across relying parties
-* If authenticators permit users to remain logged in, verify that re-authentication occurs periodically both when actively used or after an idle period
-* Verify that the application terminates all other active sessions after a successful password change, and that this is effective across the application, federated login (if present), and any relying parties.
-* Verify that users are able to view and log out of any or all currently active sessions and device
-* Verify that users are able to view and log out of any or all currently active sessions and devices.
+* Verify that logout and expiration invalidate the session token, such that the back button or a downstream relying party does not resume an authenticated session, including across relying parties.  [![FAIL](../images/fail.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* If authenticators permit users to remain logged in, verify that re-authentication occurs periodically both when actively used or after an idle period.  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* Verify that the application terminates all other active sessions after a successful password change, and that this is effective across the application, federated login (if present), and any relying parties.  [![FAIL](../images/fail.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* Verify that users are able to view and log out of any or all currently active sessions and device.  [![FAIL](../images/fail.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
 
 #### 3.5 Token Based Session Management
-* Verify the application does not treat OAuth and refresh tokens — on their own — as the presence of the subscriber and allows users to terminate trust relationships with linked applications.
-* Verify the application uses session tokens rather than static API secrets and keys, except with legacy implementations.
-* Verify that stateless session tokens use digital signatures, encryption, and other countermeasures to protect against tampering, enveloping, replay, null cipher, and key substitution attacks.
+* Verify the application uses session tokens rather than static API secrets and keys, except with legacy implementations.  [![PASS](../images/pass.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
+* Verify that stateless session tokens use digital signatures, encryption, and other countermeasures to protect against tampering, enveloping, replay, null cipher, and key substitution attacks.  [![FAIL](../images/fail.png?raw=true)](../dynamic_testing/SPL_WebServicesTesting/SPLWebServices.md)
 
 #### 3.6 Re-authentication from a Federation or Assertion
-* Verify that relying parties specify the maximum authentication time to CSPs and that CSPs re-authenticate the subscriber if they haven't used a
-session within that period.
+* Verify that relying parties specify the maximum authentication time to CSPs and that CSPs re-authenticate the subscriber if they haven't used a session within that period.
 * Verify that CSPs inform relying parties of the last authentication event, to allow RPs to determine if they need to re-authenticate the user.
 
 #### 3.7 Defenses Against Session Management Exploits
