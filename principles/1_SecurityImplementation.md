@@ -90,8 +90,7 @@ necessary privileges needed
 * Verify that attribute or feature-based access control is used whereby the code checks the user's authorization for a feature/data item rather than just their role.  Permissions should still be allocated using roles ![](../images/pass.oos?raw=true)
 
 #### 1.5 Input and Output Architectural Requirements
-* Verify that input and output requirements clearly define how to handle and process data based on type, content, and applicable laws, regulations, and other
-policy compliance
+* Verify that input and output requirements clearly define how to handle and process data based on type, content, and applicable laws, regulations, and otherpolicy compliance
 * Verify that serialization is not used when communicating with untrusted clients. If this is not possible, ensure that adequate integrity controls (and possibly encryption if sensitive data is sent) are enforced to prevent deserialization attacks including object injection
 * Verify that input validation is enforced on a trusted service layer
 * Verify that output encoding occurs close to or by the interpreter for which it is intended.
@@ -171,7 +170,7 @@ applications, especially when they are performing sensitive or dangerous actions
 #### 5.1 Input Validation Requirements
 * Verify that the application has defenses against HTTP parameter pollution attacks, particularly if the application framework makes no distinction about the source of request parameters (GET, POST, cookies, headers, or environment variables).
 * Verify that frameworks protect against mass parameter assignment attacks, or that the application has countermeasures to protect against unsafe parameter assignment, such as marking fields private or similar.
-* Verify that all input (HTML form fields, REST requests, URL parameters, HTTP headers, cookies, batch files, RSS feeds, etc) is validated using positive validation (whitelisting).
+* Verify that all input (HTML form fields, REST requests, URL parameters, HTTP headers, cookies, batch files, RSS feeds, etc) is validated using positive validation (whitelisting).  [![PARTIALLY TRUE](../images/partial.png?raw=true)](../dynamic_testing/JSONFuzzing/JZONFuzzing.md)
 * Verify that structured data is strongly typed and validated against a defined schema including allowed characters, length and pattern (e.g. credit card numbers or telephone, or validating that two related fields are reasonable, such as checking that suburb and zip/postcode match).
 * Verify that URL redirects and forwards only allow whitelisted destinations, or show a warning when redirecting to potentially untrusted content.
 
@@ -203,9 +202,8 @@ line output encoding.
 * Verify that the application protects against XPath injection or XML injection attacks.
 
 #### 5.4 Memory, String, and Unmanaged Code Requirements
-* Verify that the application uses memory-safe string, safer memory copy and
-pointer arithmetic to detect or prevent stack, buffer, or heap overflows. ✓ ✓ 120
-* Verify that format strings do not take potentially hostile input, and are constant. ✓ ✓ 134
+* Verify that the application uses memory-safe string, safer memory copy and pointer arithmetic to detect or prevent stack, buffer, or heap overflows.
+* Verify that format strings do not take potentially hostile input, and are constant.
 * Verify that sign, range, and input validation techniques are used to prevent
 integer overflows.
 
