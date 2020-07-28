@@ -1,4 +1,4 @@
-# privacy-security
+# Privacy & Security
 
 We believe that transparency in our software is an important part of ensuring security and privacy. This repository is meant to provide a public place for open source software developers, interested security and privacy experts to go to understand Path Check's:
 
